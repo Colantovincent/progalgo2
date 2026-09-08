@@ -39,7 +39,7 @@ class _Table:
             raise OutOfBoundsError(row, column)
 
         upper_bound = self._partita.width * self._partita.height - 1
-        if not (0 <= value < upper_bound):
+        if not (0 <= value <= upper_bound):
             raise ValueError(f"{value} deve essere compreso tra 0 e {upper_bound}")
 
         self._tabellone[row][column] = value
