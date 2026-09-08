@@ -1,6 +1,6 @@
 from __future__ import annotations
 from game import Game
-import random 
+from helper import Helper
 
 class OutOfBoundsError(IndexError):
     def __init__(self, riga: int, colonna: int) -> None:
@@ -39,14 +39,7 @@ class _Table:
 
 
     def is_solvable(self) -> bool:
-        continuo = True
-        controllo : set[tuple[int,int]] = set()
-        val : int = 1
-        while continuo:
-            el : tuple[int,int] = (random.randint(1,g.width), random.randint(1,g.heigth))
-            if g.table[el[0]][el[1]] == 0 and el != g_cv and el not in controllo:
-                controllo.add(el)
-                g.table[el[0]][el[1]] = val
-                val += 1
-            if val == (g.width * g.heigth -1):
-                ...
+        if self._partita.width % 2 == 0:
+            return bool((Helper.inv(self._tabellone) + Helper.ind(self._tabellone)) % 2)
+
+        return bool(Helper.inv(self._tabellone) % 2)
