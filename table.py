@@ -1,6 +1,8 @@
 from __future__ import annotations
 from game import Game
 from helper import Helper
+import random
+import math
 
 class OutOfBoundsError(IndexError):
     def __init__(self, riga: int, colonna: int) -> None:
@@ -12,13 +14,25 @@ class OutOfBoundsError(IndexError):
 class _Table:
     def __init__(self, g: Game):
         self._partita = g
-        self._tabellone: list[list[int]] = [[0 for __ in range(g.width)] for _ in range(g.height)]
+        self._tabellone: list[list[int]] = [[0] * g.width for _ in range(g.height)]
+        self._cifre = math.floor(math.log10(g.width * g.height)) + 1 #assumiamo non si voglia istanziare una matrice 0x0
+        self._cv: tuple[int, int] = (random.randint(0, g.height - 1), random.randint(0, g.width - 1))
+
+    @property
+    def cv(self) -> tuple[int, int]:
+        return self._cv
+
+    @property
+    def tabellone(self) -> list[list[int]]:
+        return self._tabellone
+
 
     @classmethod
     def copy_table(cls, t: _Table) -> _Table:
         copia = _Table(t._partita)
         copia._tabellone = [[t._tabellone[i][j] for j in range(t._partita.width)] for i in range(t._partita.height)]
         return copia
+
 
     def set_box(self, row: int, column: int, value: int) -> None:
         if not (0 <= row < self._partita.height and 0 <= column < self._partita.width):
@@ -43,3 +57,16 @@ class _Table:
             return bool((Helper.inv(self._tabellone) + Helper.ind(self._tabellone)) % 2)
 
         return bool(Helper.inv(self._tabellone) % 2)
+
+
+    def __str__(self) -> str:
+        tmp = ""
+
+        for row in self.tabellone:
+            for el in row:
+                tmp = tmp + f" {el:{self._cifre}}"
+            tmp = tmp + "\n"
+        return tmp
+
+miat = _Table(Game(16, 22))
+print(miat)
