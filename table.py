@@ -54,7 +54,7 @@ class _Table:
 
     def is_solvable(self) -> bool:
         if self._partita.width % 2 == 0:
-            return bool((Helper.inv(self._tabellone) + Helper.ind(self._tabellone)) % 2)
+            return bool((Helper.inv(self._tabellone) + Helper.ind(self._partita.height, self.cv[0])) % 2)
 
         return bool(Helper.inv(self._tabellone) % 2)
 
@@ -66,7 +66,5 @@ class _Table:
             for el in row:
                 tmp = tmp + f" {el:{self._cifre}}"
             tmp = tmp + "\n"
-        return tmp
 
-miat = _Table(Game(16, 22))
-print(miat)
+        return tmp
