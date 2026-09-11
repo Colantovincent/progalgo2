@@ -1,6 +1,7 @@
 from __future__ import annotations
 from game import Game
 from helper import Helper
+from copy import deepcopy
 import random
 import math
 
@@ -17,6 +18,7 @@ class _Table:
         self._tabellone: list[list[int]] = [[0] * g.width for _ in range(g.height)]
         self._cifre = math.floor(math.log10(g.width * g.height)) + 1 #assumiamo non si voglia istanziare una matrice 0x0
         self._cv: tuple[int, int] = (random.randint(0, g.height - 1), random.randint(0, g.width - 1))
+        self._mossa: tuple[int, int] = (-1, -1)
 
     @property
     def cv(self) -> tuple[int, int]:
@@ -25,6 +27,14 @@ class _Table:
     @property
     def tabellone(self) -> list[list[int]]:
         return self._tabellone
+
+    @tabellone.setter
+    def tabellone(self, v: list[list[int]]) -> None:
+        self._tabellone = deepcopy(v)
+
+    @property
+    def mossa(self) -> tuple[int, int]:
+        return self._mossa
 
 
     @classmethod
