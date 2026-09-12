@@ -39,6 +39,9 @@ class _Table:
     def mossa(self) -> tuple[int, int]:
         return self._mossa
 
+    @mossa.setter
+    def mossa(self, v: tuple[int, int]) -> None:
+        self._mossa = v
 
     @classmethod
     def copy_table(cls, t: _Table) -> _Table:
