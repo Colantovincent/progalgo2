@@ -1,5 +1,13 @@
 from helper import Helper
 
+def test_ordered():
+    c = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 0]
+    ]
+    assert Helper.inv(c) == 0
+
 def test_swapped():
     c = [
         [1, 3, 2, 4],
