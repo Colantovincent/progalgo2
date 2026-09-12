@@ -1,9 +1,12 @@
 from __future__ import annotations
-from game import Game
+from typing import TYPE_CHECKING
 from helper import Helper
 from copy import deepcopy
 import random
 import math
+
+if TYPE_CHECKING:
+    from game import Game
 
 class OutOfBoundsError(IndexError):
     def __init__(self, riga: int, colonna: int) -> None:
@@ -64,9 +67,9 @@ class _Table:
 
     def is_solvable(self) -> bool:
         if self._partita.width % 2 == 0:
-            return bool((Helper.inv(self._tabellone) + Helper.ind(self._partita.height, self.cv[0])) % 2)
+            return (Helper.inv(self._tabellone) + Helper.ind(self._partita.height, self.cv[0])) % 2 == 1
 
-        return bool(Helper.inv(self._tabellone) % 2)
+        return Helper.inv(self._tabellone) % 2 == 0
 
 
     def __str__(self) -> str:
