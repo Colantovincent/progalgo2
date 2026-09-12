@@ -5,7 +5,7 @@ class Game:
     def __init__(self, width:int, heigth:int) -> None:
         self._width = width
         self._height = heigth
-        t = _Table(self)
+        self._t = _Table(self)
         self._completed : bool = False
         self._table : list[list[int]] = t.tabellone
         self._cv : tuple[int,int] = t.cv 
@@ -20,6 +20,10 @@ class Game:
     @property
     def height(self):
         return self._height
+
+    @property
+    def t(self):
+        return self._t
 
     @property
     def completed(self):
@@ -92,7 +96,7 @@ class Game:
                     self.table[self.cv[0]-i][column] = tmp[-1-i]
                 self.table[row][column] = 0
         new : _Table = _Table(self)
-        new.tabellone = copy.deepcopy(self.table)
+        new.tabellone = _Table.copy_table(self.t).tabellone
         self.history.append(new)
         self.indice = len(self.history) - 1
         new.mossa,self.cv= (row,column),(row,column)
