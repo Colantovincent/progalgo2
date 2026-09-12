@@ -46,7 +46,9 @@ class _Table:
     @classmethod
     def copy_table(cls, t: _Table) -> _Table:
         copia = _Table(t._partita)
-        copia._tabellone = [[t._tabellone[i][j] for j in range(t._partita.width)] for i in range(t._partita.height)]
+        for i in range(t._partita.height):
+            for j in range(t._partita.width):
+                copia.set_box(i, j, t.get_box(i, j))
         return copia
 
 
@@ -59,6 +61,8 @@ class _Table:
             raise ValueError(f"{value} deve essere compreso tra 0 e {upper_bound}")
 
         self._tabellone[row][column] = value
+        if value == 0:
+            self._cv = (row, column)
 
 
     def get_box(self, row: int, column: int) -> int:

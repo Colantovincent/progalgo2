@@ -54,3 +54,41 @@ def test_odd_unsolvable():
     ]
     t = from_config(config)
     assert not t.is_solvable()
+
+def test_odd_scrambled_solvable():
+    config = [
+        [2, 4, 5],
+        [1, 8, 0],
+        [6, 7, 3]
+    ]
+    t = from_config(config)
+    assert t.is_solvable()
+
+def test_odd_scrambled_unsolvable():
+    config = [
+        [2, 7, 8],
+        [1, 4, 5],
+        [0, 3, 6]
+    ]
+    t = from_config(config)
+    assert not t.is_solvable()
+
+def test_even_scrambled_solvable():
+    config = [
+        [11, 12, 6, 10],
+        [14, 4, 7, 8],
+        [3, 13, 1, 2],
+        [5, 15, 9, 0]
+    ]
+    t = from_config(config)
+    assert t.is_solvable()
+
+def test_even_scrambled_unsolvable():
+    config = [
+        [1, 9, 7, 6],
+        [5, 11, 13, 4],
+        [10, 14, 2, 8],
+        [12, 3, 0, 15]
+    ]
+    t = from_config(config)
+    assert not t.is_solvable()
