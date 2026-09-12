@@ -1,5 +1,5 @@
 from table  import _Table
-import copy
+
 
 class Game:
     def __init__(self, width:int, heigth:int) -> None:
@@ -7,8 +7,8 @@ class Game:
         self._height = heigth
         self._t = _Table(self)
         self._completed : bool = False
-        self._table : list[list[int]] = t.tabellone
-        self._cv : tuple[int,int] = t.cv 
+        self._table : list[list[int]] = self.t.tabellone
+        self._cv : tuple[int,int] = self.t.cv 
         self._history : list[_Table] = []
         self._indice : int = 0
         
