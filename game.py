@@ -92,7 +92,7 @@ class Game:
                     self.table[self.cv[0]-i][column] = tmp[-1-i]
                 self.table[row][column] = 0
         new : _Table = _Table(self)
-        new._tabellone = copy.deepcopy(self.table)
+        new.tabellone = copy.deepcopy(self.table)
         self.history.append(new)
         self.indice = len(self.history) - 1
         new.mossa,self.cv= (row,column),(row,column)
