@@ -82,7 +82,7 @@ class _Table:
 
     def randomize(self) -> None:
         while not self.is_solvable():
-            tmp = [i for i in range(self._partita.width * self._partita.height - 1)]
+            tmp = [i for i in range(self._partita.width * self._partita.height)]
             random.shuffle(tmp)
             k = 0
             for i in range(self._partita.height):
