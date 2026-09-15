@@ -1,6 +1,7 @@
 from __future__ import annotations
 from ezgraphics import GraphicsWindow
 from game import Game
+
 class EventHandler:
     def __init__(self, g: Game, gui: Gui):
         self._g = g
