@@ -127,3 +127,5 @@ class Game:
                 risultato.append(f"Tabellone a seguito della mossa di riga {riga} e colonna {colonna}:\n{str(tabellone_corrente)}")
         
         return "\n\n".join(risultato)
+
+
