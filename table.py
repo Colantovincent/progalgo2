@@ -84,20 +84,12 @@ class _Table:
         while not self.is_solvable():
             tmp = [i for i in range(self._partita.width * self._partita.height - 1)]
             random.shuffle(tmp)
-            self._tabellone = [tmp[i:i + self._partita.width] for i in range(0, self._partita.width * self._partita.height, self._partita.width)] 
+            k = 0
+            for i in range(self._partita.height):
+                for j in range(self._partita.width):
+                    self.set_box(i, j, tmp[k])
+                    k += 1
 
-        return
-        continuo = True
-        controllo : set[tuple[int,int]] = set()
-        val : int = 1
-        while continuo:
-            el : tuple[int,int] = (random.randint(1,self._partita.width), random.randint(1,g.heigth))
-            if self._partita.table[el[0]][el[1]] == 0 and el != self._cv and el not in controllo:
-                controllo.add(el)
-                self._partita.table[el[0]][el[1]] = val
-                val += 1
-            if val == (self._partita.width * self._partita.heigth -1):
-                ...
 
     def __str__(self) -> str:
         tmp = ""
