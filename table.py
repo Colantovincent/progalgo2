@@ -81,7 +81,8 @@ class _Table:
 
 
     def randomize(self) -> None:
-        while not self.is_solvable():
+        solvable = False
+        while not solvable:
             tmp = [i for i in range(self._partita.width * self._partita.height)]
             random.shuffle(tmp)
             k = 0
@@ -89,6 +90,7 @@ class _Table:
                 for j in range(self._partita.width):
                     self.set_box(i, j, tmp[k])
                     k += 1
+            solvable = self.is_solvable()
 
 
     def __str__(self) -> str:
