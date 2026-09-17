@@ -11,7 +11,7 @@ class Game:
         self._cv : tuple[int,int] = self.t.cv 
         self._history : list[_Table] = []
         self._indice : int = 0
-        
+        self._mosse : int = 0
 
     @property
     def width(self):
@@ -65,6 +65,15 @@ class Game:
         self._indice = new
         return
 
+    @property
+    def mosse(self):
+        return self._mosse
+
+    @mosse.setter
+    def mosse(self, new : int):
+        self._mosse = new
+    
+
     def move(self, row:int, column:int) -> None:
         if self.completed or (row, column) == self.cv or (self.cv[0] != row and self.cv[1] != column):
             return
@@ -99,7 +108,7 @@ class Game:
         self.history.append(new)
         self.indice = len(self.history) - 1
         new.mossa,self.cv= (row,column),(row,column)
-
+        self.mosse += 1
         return  
 
     def undo(self) -> None:
@@ -107,6 +116,7 @@ class Game:
             self.indice -= 1
             self.table = _Table.copy_table(self.history[self.indice]).tabellone
             self.cv = self.history[self.indice].cv
+            self.mosse += 1
         return
 
     def redo(self) -> None:
@@ -114,6 +124,7 @@ class Game:
             self.indice +=1 
             self.table = _Table.copy_table(self.history[self.indice]).tabellone
             self.cv = self.history[self.indice].cv
+            self.mosse += 1
         return
          
     def __str__(self) -> str:
