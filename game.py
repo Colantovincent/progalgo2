@@ -110,7 +110,7 @@ class Game:
         self.indice = len(self.history) - 1
         new.mossa,self.cv= (row,column),(row,column)
         self.mosse += 1
-        return  
+        self.completed = self.completato()
 
     def undo(self) -> None:
         if self.indice >0:
@@ -118,7 +118,6 @@ class Game:
             self.table = _Table.copy_table(self.history[self.indice]).tabellone
             self.cv = self.history[self.indice].cv
             self.mosse += 1
-        return
 
     def redo(self) -> None:
         if self.indice < len(self.history)-1:
@@ -126,7 +125,6 @@ class Game:
             self.table = _Table.copy_table(self.history[self.indice]).tabellone
             self.cv = self.history[self.indice].cv
             self.mosse += 1
-        return
          
     def __str__(self) -> str:
         risultato : list[str] = []
@@ -140,4 +138,15 @@ class Game:
         
         return "\n\n".join(risultato)
 
-
+    def completato(self) -> bool:
+        if self.table[self.height - 1][self.width - 1] != 0:
+            return False
+        atteso = 1
+        for i in range(self.height):
+            for j in range(self.width):
+                if i == self.height - 1 and j == self.width - 1:
+                    return True
+                if self.table[i][j] != atteso:
+                    return False
+                atteso += 1
+        return True
