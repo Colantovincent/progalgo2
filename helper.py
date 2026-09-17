@@ -2,7 +2,7 @@ class Helper:
     @classmethod
     def inv(cls, c: list[list[int]]) -> int:
         conta = 0
-        v = cls._flatter(c)
+        v = cls._flatten(c)
         for i in range(len(v)):
             el = v[i]
             if el == 0:
@@ -18,7 +18,7 @@ class Helper:
         return n - i
 
     @classmethod
-    def _flatter(cls, c: list[list[int]]) -> list[int]:
+    def _flatten(cls, c: list[list[int]]) -> list[int]:
         linearizzata: list[int] = []
         for riga in c:
             for el in riga:
