@@ -9,7 +9,7 @@ class Game:
         self._completed : bool = False
         self._table : list[list[int]] = self.t.tabellone
         self._cv : tuple[int,int] = self.t.cv 
-        self._history : list[_Table] = []
+        self._history : list[_Table] = [self.t]
         self._indice : int = 0
         self._mosse : int = 0
 
