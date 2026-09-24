@@ -3,7 +3,7 @@ import sys
 from abc import ABC, abstractmethod
 from typing import Final
 from ezgraphics import GraphicsWindow
-from game import Game
+from gioco_del_15 import Game
 
 
 class EventHandler(ABC):
@@ -153,7 +153,10 @@ class Gui:
                     center_y = self.PADDING + i * self.CELL_SIZE + self.CELL_SIZE // 2
                     self.canvas.drawText(center_x, center_y, str(val))
         self.canvas.drawText(self.win_width // 2, self.PADDING // 2, f"Mosse: {self.g.mosse}")
-
+        if self.g.completed:
+            self.canvas.setTextFont("helvetica", "bold", 20)
+            self.canvas.setOutline("green")
+            self.canvas.drawText(self.win_width // 2, self.win_height - self.PADDING // 2, "HAI VINTO!")
 
 if __name__ == "__main__":
-    gui = Gui(Game(5, 5))
+    gui = Gui(Game(3,3))
